@@ -1,0 +1,230 @@
+##########################
+#~~~~~~~~~~~~~~~~~~~~~~~~#
+#~ Name: Emily Cowie    ~#
+#~ Date: 19/04/2024     ~#
+#~ Title: Hangman       ~#
+#~~~~~~~~~~~~~~~~~~~~~~~~#
+##########################
+
+
+
+#----imports---------------------------------
+import random
+import sys
+#----variables-------------------------------
+
+words = ('ant baboon badger bat bear beaver camel cat clam cobra cougar '
+         'coyote crow deer dog donkey duck eagle ferret fox frog goat '
+         'goose hawk lion lizard llama mole monkey moose mouse mule newt '
+         'otter owl panda parrot pigeon python rabbit ram rat raven '
+         'rhino salmon seal shark sheep skunk sloth snake spider '
+         'stork swan tiger toad trout turkey turtle weasel whale wolf '
+         'wombat zebra ').split()
+
+numberofguesses = 0
+
+guessed = []
+
+HangmanASCII = (
+    """
+ ------
+|     |
+|
+|
+|
+|
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|
+|
+|
+|
+|
+----------
+"""
+   ,
+"""
+ ------
+|     |
+|     0
+|     +
+|
+|
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|    -+
+|
+|
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|    -+-
+|
+|
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|   /-+-
+|
+|
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|   /-+-/
+|
+|
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|   /-+-/
+|     |
+|
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|   /-+-/
+|     |
+|     |
+|
+|
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|   /-+-/
+|     |
+|     |
+|    |
+|    |
+----------
+"""
+    ,
+"""
+ ------
+|     |
+|     0
+|   /-+-/
+|     |
+|     |
+|    | |
+|    | |
+----------
+"""
+)
+#----functions-------------------------------
+def menu():
+	choice = input(''' 
+Welcome to Hangman™, here are your options:
+------------------------------
+1. Play game
+2. Information
+3. Exit
+------------------------------
+Choose which one you would like to do. 
+''')
+	if choice == '1':
+		return
+	elif choice == '2':
+		 information()
+	elif choice == '3':
+		exit('Bye Bye')
+
+
+
+
+def information():
+    choice = input(''' 
+*****************************************************************************************
+* Welcome to Hangman™!																	*
+* This is the classic game of Hangman. The computer picks a random word and the player	*
+* tries to guess it, one letter at a time. If the player can't guess the word in		*
+* time, the little stick figure gets hanged												*
+*****************************************************************************************
+''')
+    menu()
+
+
+def check(guess, numberofguesses):
+	if guess in answer:
+		print("Correct")
+		correct()
+	else:
+		print("NOPE")
+		print(HangmanASCII(numberofguesses))
+
+
+def correct(guess):
+	new = ""
+	for i in range(len(answer)):
+		if guess == word[i]:
+			new += guess
+		else:
+			new += so_far[i]
+
+#----main program----------------------------
+menu()
+
+# word chosen by computer e.g. deer
+answer = words[random.randint(0,len(words))]
+
+print("Here is your word:")
+blanks = '_ ' * len(answer) #blanks for each letter
+print(blanks)
+
+guess = input("Guess a letter\n\n")
+numberofguesses += 1
+check(guess, numberofguesses)
+
+# NEXT:
+#
+# Get the pc to reveal letter that was correct
+#
+#	https://trinket.io/python/02c914e46c
+#

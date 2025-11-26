@@ -10,7 +10,10 @@ def get_questions():
 
 def format_questions(questions):
     for i in questions:
-        print('1')
+        for j in i:
+            for k in j:
+                print(k)
+            
         
 
 def main():

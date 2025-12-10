@@ -1,9 +1,6 @@
 import csv
 import random
 
-from matplotlib import artist
-
-
 class Questions:
     def __init__(self):
         self.questions = self.get_questions()
